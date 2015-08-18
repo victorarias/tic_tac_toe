@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    attr_extras (4.4.0)
     diff-lcs (1.2.5)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
@@ -20,4 +21,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attr_extras
   rspec
