@@ -6,8 +6,18 @@ describe "Tic-tac-toe game" do
     expect_to_be_asked_to_choose_a_player
     choose_player_x
 
-    # temp
-    expect(@stdout.gets.chomp).to eq("You've chosen X.")
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 |   |   |   |
+  +---+---+---+
+2 |   |   |   |
+  +---+---+---+
+3 |   |   |   |
+  +---+---+---+
+      EOS
+    )
+    expect_to_be_asked_for_a_move
   end
 
   private
@@ -22,5 +32,14 @@ describe "Tic-tac-toe game" do
 
   def choose_player_x
     @stdin.puts "X"
+  end
+
+  def expect_to_see_grid(expected_grid)
+    grid = 8.times.map { @stdout.gets }.join
+    expect(grid).to eq(expected_grid)
+  end
+
+  def expect_to_be_asked_for_a_move
+    expect(@stdout.gets.chomp).to eq("Where do you want to move?")
   end
 end
