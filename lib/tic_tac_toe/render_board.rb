@@ -1,14 +1,13 @@
 require "tic_tac_toe/marks"
 
 class RenderBoard
-  method_object [ :io ]
+  method_object [ :board, :io ]
 
   def call
     render_header
     render_division_line
 
-    0.upto(2).each do |line_number|
-      line = [ NoMark, NoMark, NoMark ]
+    board.lines.each_with_index do |line, line_number|
       render_line(line_number, line)
       render_division_line
     end
