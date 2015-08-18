@@ -7,3 +7,5 @@ class Mark
 end
 
 NoMark = Mark.new(" ")
+XMark = Mark.new("X")
+OMark = Mark.new("O")
