@@ -11,15 +11,15 @@ class TicTacToe
     static_facade :run
 
     def run
-      player = ChoosePlayerMark.call(client: self)
-      computer_mark = [ XMark, OMark ].reject { |mark| mark == player }.first
+      player_mark = ChoosePlayerMark.call(client: self)
+      computer_mark = select_computer_mark(player_mark)
 
       board = Board.empty
       RenderBoard.call(board: board, client: self)
 
       puts "Where do you want to move?"
 
-      move = read_move_from_player(player)
+      move = read_move_from_player(player_mark)
       board = board.apply_move(move)
 
       move = make_random_move_on(board, computer_mark)
@@ -37,6 +37,10 @@ class TicTacToe
     end
 
     private
+
+    def select_computer_mark(player_mark)
+      [ XMark, OMark ].reject { |mark| mark == player_mark }.first
+    end
 
     def make_random_move_on(board, mark)
       available_positions = board.available_positions
