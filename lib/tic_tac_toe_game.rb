@@ -1,5 +1,6 @@
 require "attr_extras"
 
+require "tic_tac_toe/choose_player_mark"
 require "tic_tac_toe/board"
 require "tic_tac_toe/render_board"
 require "tic_tac_toe/position"
@@ -9,8 +10,7 @@ class TicTacToeGame
   static_facade :run
 
   def run
-    puts "Which player do you want to be? X or O?"
-    player = readline.chomp
+    player = TicTacToe::ChoosePlayerMark.call(client: self)
 
     board = TicTacToe::Board.empty
     TicTacToe::RenderBoard.call(board: board, io: STDOUT)
@@ -21,6 +21,14 @@ class TicTacToeGame
     board = board.apply_move(move)
 
     TicTacToe::RenderBoard.call(board: board, io: STDOUT)
+  end
+
+  def say(message)
+    puts message
+  end
+
+  def read_player_command
+    readline.chomp
   end
 
   private
