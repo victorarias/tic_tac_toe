@@ -60,4 +60,9 @@ describe "Tic-tac-toe game" do
   def make_move(move)
     @stdin.puts move
   end
+
+  after do
+    @stdin.close
+    @stdout.close
+  end
 end
