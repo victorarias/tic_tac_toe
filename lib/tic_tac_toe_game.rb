@@ -44,7 +44,7 @@ class TicTacToeGame
   end
 
   def read_move_from_player(player)
-    human_move = STDIN.readline.chomp
+    human_move = read_player_command
     position = TicTacToe::Position.parse(human_move)
     TicTacToe::Move.new(position: position, mark: player)
   end
