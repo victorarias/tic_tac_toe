@@ -2,7 +2,7 @@
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "../lib"))
 
-require "tic_tac_toe_game"
+require "tic_tac_toe/game"
 
 STDIN.sync = true
 STDOUT.sync = true
@@ -11,4 +11,4 @@ if ARGV.first == "--test-seed"
   srand(0)
 end
 
-TicTacToeGame.run
+TicTacToe::Game.run
