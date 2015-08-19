@@ -17,7 +17,21 @@ describe "Tic-tac-toe game" do
   +---+---+---+
       EOS
     )
+
     expect_to_be_asked_for_a_move
+    make_move "B2"
+
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 |   |   |   |
+  +---+---+---+
+2 |   | X |   |
+  +---+---+---+
+3 |   |   |   |
+  +---+---+---+
+      EOS
+    )
   end
 
   private
@@ -41,5 +55,9 @@ describe "Tic-tac-toe game" do
 
   def expect_to_be_asked_for_a_move
     expect(@stdout.gets.chomp).to eq("Where do you want to move?")
+  end
+
+  def make_move(move)
+    @stdin.puts move
   end
 end
