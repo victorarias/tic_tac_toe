@@ -1,3 +1,3 @@
 - This was pretty cool: https://www.dropbox.com/s/vlbwvq9crzscpvv/Screenshot%202015-08-18%2023.23.21.png?dl=0
-
 - Deciding between double or models wasn't easy for this app. Some models like `TicTacToe::Position` are so simple that I believe that using them makes the specs tell a better story.
+- Dealing with repeating interaction at `TicTacToe::ChoosePlayerMark` was tricky. It's never easy to stub multiple calls to the same method.
