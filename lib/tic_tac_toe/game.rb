@@ -15,7 +15,7 @@ class TicTacToe
       computer_mark = [ XMark, OMark ].reject { |mark| mark == player }.first
 
       board = Board.empty
-      RenderBoard.call(board: board, io: STDOUT)
+      RenderBoard.call(board: board, client: self)
 
       puts "Where do you want to move?"
 
@@ -25,7 +25,7 @@ class TicTacToe
       move = make_random_move_on(board, computer_mark)
       board = board.apply_move(move)
 
-      RenderBoard.call(board: board, io: STDOUT)
+      RenderBoard.call(board: board, client: self)
     end
 
     def say(message)

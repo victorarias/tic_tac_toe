@@ -1,6 +1,6 @@
 class TicTacToe
   class RenderBoard
-    method_object [ :board, :io ]
+    method_object [ :board!, :client! ]
 
     def call
       render_header
@@ -15,15 +15,15 @@ class TicTacToe
     private
 
     def render_header
-      io.puts("    A   B   C")
+      client.say("    A   B   C")
     end
 
     def render_division_line
-      io.puts("  +---+---+---+")
+      client.say("  +---+---+---+")
     end
 
     def render_line(line_number, contents)
-      io.puts("#{line_number + 1} | #{contents[0]} | #{contents[1]} | #{contents[2]} |")
+      client.say("#{line_number + 1} | #{contents[0]} | #{contents[1]} | #{contents[2]} |")
     end
   end
 end

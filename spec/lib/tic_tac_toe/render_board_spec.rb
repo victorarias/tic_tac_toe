@@ -3,9 +3,17 @@ require "tic_tac_toe/render_board"
 require "tic_tac_toe/board"
 
 describe TicTacToe::RenderBoard, "#call" do
+  class TestClient
+    vattr_initialize :io
+
+    def say(message)
+      io.puts(message)
+    end
+  end
+
   it "renders an empty board" do
     io = StringIO.new
-    TicTacToe::RenderBoard.call(board: TicTacToe::Board.empty, io: io)
+    TicTacToe::RenderBoard.call(board: TicTacToe::Board.empty, client: TestClient.new(io))
 
     expect(io.string).to eq(<<-EOS
     A   B   C
@@ -27,7 +35,7 @@ describe TicTacToe::RenderBoard, "#call" do
       [ XMark, OMark, XMark ],
       [ XMark, NoMark, OMark ],
     ])
-    TicTacToe::RenderBoard.call(board: board, io: io)
+    TicTacToe::RenderBoard.call(board: board, client: TestClient.new(io))
 
     expect(io.string).to eq(<<-EOS
     A   B   C
