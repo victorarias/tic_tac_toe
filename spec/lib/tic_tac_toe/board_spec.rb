@@ -19,3 +19,19 @@ describe TicTacToe::Board, "#apply_move" do
     ])
   end
 end
+
+describe TicTacToe::Board, "#available_positions" do
+  it "returns positions with no mark" do
+    board = TicTacToe::Board.new([
+      [ NoMark, XMark, XMark ],
+      [ XMark, NoMark, XMark ],
+      [ XMark, XMark, NoMark ],
+    ])
+
+    expect(board.available_positions).to eq([
+      TicTacToe::Position.new(0, 0),
+      TicTacToe::Position.new(1, 1),
+      TicTacToe::Position.new(2, 2),
+    ])
+  end
+end

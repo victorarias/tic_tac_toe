@@ -24,7 +24,7 @@ describe "Tic-tac-toe game" do
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
-1 |   |   |   |
+1 | O |   |   |
   +---+---+---+
 2 |   | X |   |
   +---+---+---+
@@ -37,7 +37,7 @@ describe "Tic-tac-toe game" do
   private
 
   def run_game
-    @stdin, @stdout = Open3.popen2("bin/ttt")
+    @stdin, @stdout = Open3.popen2("bin/ttt --test-seed")
   end
 
   def expect_to_be_asked_to_choose_a_player

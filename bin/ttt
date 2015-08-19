@@ -7,4 +7,8 @@ require "tic_tac_toe_game"
 STDIN.sync = true
 STDOUT.sync = true
 
+if ARGV.first == "--test-seed"
+  srand(0)
+end
+
 TicTacToeGame.run
