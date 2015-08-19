@@ -1,5 +1,3 @@
-require "tic_tac_toe/marks"
-
 class RenderBoard
   method_object [ :board, :io ]
 
