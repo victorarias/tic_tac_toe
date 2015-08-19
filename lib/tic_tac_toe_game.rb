@@ -13,14 +13,14 @@ class TicTacToeGame
     player = readline.chomp
 
     board = TicTacToe::Board.empty
-    RenderBoard.call(board: board, io: STDOUT)
+    TicTacToe::RenderBoard.call(board: board, io: STDOUT)
 
     puts "Where do you want to move?"
 
     move = read_move_from_player(player)
     board = board.apply_move(move)
 
-    RenderBoard.call(board: board, io: STDOUT)
+    TicTacToe::RenderBoard.call(board: board, io: STDOUT)
   end
 
   private

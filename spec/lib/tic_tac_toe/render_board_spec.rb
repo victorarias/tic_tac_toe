@@ -2,10 +2,10 @@ require "tic_tac_toe/render_board"
 
 require "tic_tac_toe/board"
 
-describe RenderBoard, "#call" do
+describe TicTacToe::RenderBoard, "#call" do
   it "renders an empty board" do
     io = StringIO.new
-    RenderBoard.call(board: TicTacToe::Board.empty, io: io)
+    TicTacToe::RenderBoard.call(board: TicTacToe::Board.empty, io: io)
 
     expect(io.string).to eq(<<-EOS
     A   B   C
@@ -27,7 +27,7 @@ describe RenderBoard, "#call" do
       [ XMark, OMark, XMark ],
       [ XMark, NoMark, OMark ],
     ])
-    RenderBoard.call(board: board, io: io)
+    TicTacToe::RenderBoard.call(board: board, io: io)
 
     expect(io.string).to eq(<<-EOS
     A   B   C
