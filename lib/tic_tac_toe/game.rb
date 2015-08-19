@@ -19,10 +19,12 @@ class TicTacToe
 
       puts "Where do you want to move?"
 
-      move = read_move_from_player(player_mark)
+      position = read_position_from_player
+      move = Move.new(position: position, mark: player_mark)
       board = board.apply_move(move)
 
-      move = make_random_move_on(board, computer_mark)
+      position = select_random_position(board)
+      move = Move.new(position: position, mark: computer_mark)
       board = board.apply_move(move)
 
       RenderBoard.call(board: board, client: self)
@@ -42,16 +44,14 @@ class TicTacToe
       [ XMark, OMark ].reject { |mark| mark == player_mark }.first
     end
 
-    def make_random_move_on(board, mark)
-      available_positions = board.available_positions
-      random_position = available_positions[rand % available_positions.size]
-      Move.new(position: random_position, mark: mark)
+    def read_position_from_player
+      human_move = read_player_command
+      Position.parse(human_move)
     end
 
-    def read_move_from_player(player)
-      human_move = read_player_command
-      position = Position.parse(human_move)
-      Move.new(position: position, mark: player)
+    def select_random_position(board)
+      available_positions = board.available_positions
+      available_positions[rand % available_positions.size]
     end
   end
 end
