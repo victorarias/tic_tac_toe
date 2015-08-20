@@ -35,3 +35,47 @@ describe TicTacToe::Board, "#available_positions" do
     ])
   end
 end
+
+describe TicTacToe::Board, "#won?" do
+  it "returns true when the given mark is present on one line" do
+    board = TicTacToe::Board.new([
+      [ XMark, OMark, OMark ],
+      [ XMark, XMark, XMark ],
+      [ OMark, XMark, XMark ],
+    ])
+
+    expect(board.won?(XMark)).to eq(true)
+    expect(board.won?(OMark)).to eq(false)
+  end
+
+  it "returns true when the given mark is present on one column" do
+    board = TicTacToe::Board.new([
+      [ XMark, OMark, XMark ],
+      [ OMark, XMark, XMark ],
+      [ OMark, XMark, XMark ],
+    ])
+
+    expect(board.won?(XMark)).to eq(true)
+    expect(board.won?(OMark)).to eq(false)
+  end
+
+  it "returns true when the given mark is present on one of the diagonals" do
+    board = TicTacToe::Board.new([
+      [ XMark, OMark, OMark ],
+      [ OMark, XMark, OMark ],
+      [ OMark, OMark, XMark ],
+    ])
+
+    expect(board.won?(XMark)).to eq(true)
+    expect(board.won?(OMark)).to eq(false)
+
+    board = TicTacToe::Board.new([
+      [ XMark, XMark, OMark ],
+      [ XMark, OMark, XMark ],
+      [ OMark, XMark, XMark ],
+    ])
+
+    expect(board.won?(XMark)).to eq(false)
+    expect(board.won?(OMark)).to eq(true)
+  end
+end
