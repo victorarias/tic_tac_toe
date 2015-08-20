@@ -32,12 +32,45 @@ describe "Tic-tac-toe game" do
   +---+---+---+
       EOS
     )
+
+    expect_to_be_asked_for_a_move
+    make_move "B1"
+
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 | O | X | O |
+  +---+---+---+
+2 |   | X |   |
+  +---+---+---+
+3 |   |   |   |
+  +---+---+---+
+      EOS
+    )
+
+    expect_to_be_asked_for_a_move
+    make_move "B3"
+
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 | O | X | O |
+  +---+---+---+
+2 |   | X |   |
+  +---+---+---+
+3 |   | X |   |
+  +---+---+---+
+      EOS
+    )
+
+    expect_to_win
+    wait_thread_to_exit
   end
 
   private
 
   def run_game
-    @stdin, @stdout = Open3.popen2("bin/ttt --test-seed")
+    @stdin, @stdout, @wait_thread = Open3.popen2("bin/ttt --test-seed")
   end
 
   def expect_to_be_asked_to_choose_a_player
@@ -59,6 +92,14 @@ describe "Tic-tac-toe game" do
 
   def make_move(move)
     @stdin.puts move
+  end
+
+  def expect_to_win
+    expect(@stdout.gets.chomp).to eq("You won, congrats!")
+  end
+
+  def wait_thread_to_exit
+    Timeout::timeout(1) { @wait_thread.join }
   end
 
   after do

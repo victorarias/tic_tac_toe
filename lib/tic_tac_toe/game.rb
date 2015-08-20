@@ -17,17 +17,18 @@ class TicTacToe
       board = Board.empty
       RenderBoard.call(board: board, client: self)
 
-      puts "Where do you want to move?"
+      loop do
+        puts "Where do you want to move?"
 
-      position = read_position_from_player
-      move = Move.new(position: position, mark: player_mark)
-      board = board.apply_move(move)
+        board = play(mark: player_mark, with_position: read_position_from_player, board: board)
+        notify_win_and_exit(board) if board.won?(player_mark)
 
-      position = select_random_position(board)
-      move = Move.new(position: position, mark: computer_mark)
-      board = board.apply_move(move)
+        board = play(mark: computer_mark, with_position: select_random_position(board), board: board)
+        # TODO: implement loss
+        # notify_loss_and_exit(board) if board.won?(computer_mark)
 
-      RenderBoard.call(board: board, client: self)
+        RenderBoard.call(board: board, client: self)
+      end
     end
 
     def say(message)
@@ -44,9 +45,21 @@ class TicTacToe
       [ XMark, OMark ].reject { |mark| mark == player_mark }.first
     end
 
+    def play(mark:, with_position:, board:)
+      move = Move.new(position: with_position, mark: mark)
+      board.apply_move(move)
+    end
+
     def read_position_from_player
       human_move = read_player_command
       Position.parse(human_move)
+    end
+
+    def notify_win_and_exit(board)
+      RenderBoard.call(board: board, client: self)
+
+      say("You won, congrats!")
+      exit
     end
 
     def select_random_position(board)
