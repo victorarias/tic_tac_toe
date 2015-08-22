@@ -1,6 +1,6 @@
 require "tic_tac_toe/choose_player_mark"
 
-class TicTacToe
+module TicTacToe
   class SelectMarks
     method_object :client
 

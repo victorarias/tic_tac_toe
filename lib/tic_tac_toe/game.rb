@@ -8,7 +8,7 @@ require "tic_tac_toe/move"
 require "tic_tac_toe/player"
 require "tic_tac_toe/computer"
 
-class TicTacToe
+module TicTacToe
   class Game
     static_facade :run
     attr_private :mark_to_player

@@ -1,4 +1,4 @@
-class TicTacToe
+module TicTacToe
   class Mark
     vattr_initialize :value
 

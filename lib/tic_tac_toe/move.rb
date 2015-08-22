@@ -1,4 +1,4 @@
-class TicTacToe
+module TicTacToe
   class Move
     pattr_initialize [ :position, :mark ]
 

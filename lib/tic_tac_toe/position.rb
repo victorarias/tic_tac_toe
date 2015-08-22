@@ -1,4 +1,4 @@
-class TicTacToe
+module TicTacToe
   class Position
     COLUMN_TO_NUMBER = {
       "A" => 0,

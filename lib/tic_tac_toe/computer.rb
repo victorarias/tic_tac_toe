@@ -1,4 +1,4 @@
-class TicTacToe
+module TicTacToe
   class Computer
     pattr_initialize [ :random_number_generator ]
 

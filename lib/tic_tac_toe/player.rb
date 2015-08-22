@@ -1,6 +1,6 @@
 require "tic_tac_toe/position"
 
-class TicTacToe
+module TicTacToe
   class Player
     vattr_initialize :client
 

@@ -1,4 +1,4 @@
-class TicTacToe
+module TicTacToe
   class RenderBoard
     method_object [ :board!, :client! ]
 
