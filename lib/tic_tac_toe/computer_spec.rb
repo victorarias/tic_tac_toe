@@ -21,4 +21,6 @@ describe TicTacToe::Computer, "#select_mark" do
     selected_mark = computer.select_mark(board)
     expect(selected_mark).to eq(position_2)
   end
+
+  it "raises if there is no available position to select"
 end
