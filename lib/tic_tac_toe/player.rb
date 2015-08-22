@@ -1,6 +1,8 @@
+require "tic_tac_toe/position"
+
 class TicTacToe
   class Player
-    vattr_initialize :mark, :client
+    vattr_initialize :client
 
     def select_move
       client.say("Where do you want to move?")

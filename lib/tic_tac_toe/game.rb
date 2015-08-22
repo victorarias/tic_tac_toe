@@ -3,7 +3,6 @@ require "attr_extras"
 require "tic_tac_toe/select_marks"
 require "tic_tac_toe/board"
 require "tic_tac_toe/render_board"
-require "tic_tac_toe/position"
 require "tic_tac_toe/move"
 
 require "tic_tac_toe/player"
@@ -20,11 +19,11 @@ class TicTacToe
       RenderBoard.call(board: board, client: self)
 
       loop do
-        player = Player.new(player_mark, self)
+        player = Player.new(self)
         board = play(mark: player_mark, with_position: player.select_move, board: board)
         notify_win_and_exit(board) if board.won?(player_mark)
 
-        computer = Computer.new(computer_mark)
+        computer = Computer.new
         board = play(mark: computer_mark, with_position: computer.select_mark(board), board: board)
         # TODO: implement loss
         # notify_loss_and_exit(board) if board.won?(computer_mark)
