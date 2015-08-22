@@ -17,17 +17,13 @@ class TicTacToe
       assign_marks(*SelectMarks.call(self))
 
       board = Board.empty
-      RenderBoard.call(board: board, client: self)
+      render_board(board)
 
       loop do
         board = play(mark: XMark, with_position: x_mark_player.select_position_for_move(board), board: board)
-        RenderBoard.call(board: board, client: self)
-
         notify_win_and_exit(XMark, board) if board.won?(XMark)
 
         board = play(mark: OMark, with_position: o_mark_player.select_position_for_move(board), board: board)
-        RenderBoard.call(board: board, client: self)
-
         notify_win_and_exit(OMark, board) if board.won?(OMark)
       end
     end
@@ -54,6 +50,10 @@ class TicTacToe
       @mark_to_player = player_to_mark.to_a.map { |player_and_mark| player_and_mark.reverse }.to_h
     end
 
+    def render_board(board)
+      RenderBoard.call(board: board, client: self)
+    end
+
     def x_mark_player
       mark_to_player[XMark]
     end
@@ -64,7 +64,9 @@ class TicTacToe
 
     def play(mark:, with_position:, board:)
       move = Move.new(position: with_position, mark: mark)
-      board.apply_move(move)
+      board = board.apply_move(move)
+      render_board(board)
+      board
     end
 
     def notify_win_and_exit(mark, board)
