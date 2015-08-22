@@ -5,7 +5,7 @@ class TicTacToe
     method_object :client
 
     def call
-      player_mark = ChoosePlayerMark.call(client: client)
+      player_mark = ChoosePlayerMark.call(client)
       computer_mark = select_computer_mark(player_mark)
 
       [ player_mark, computer_mark ]

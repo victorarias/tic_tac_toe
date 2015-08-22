@@ -6,14 +6,14 @@ describe TicTacToe::ChoosePlayerMark, "#call" do
 
     expect(client).to receive(:say).with("Which player do you want to be? X or O?")
 
-    TicTacToe::ChoosePlayerMark.call(client: client)
+    TicTacToe::ChoosePlayerMark.call(client)
   end
 
   it "returns XMark when the player command is X" do
     client = build_client
     allow(client).to receive(:read_player_command).and_return("X")
 
-    actual = TicTacToe::ChoosePlayerMark.call(client: client)
+    actual = TicTacToe::ChoosePlayerMark.call(client)
 
     expect(actual).to eq(XMark)
   end
@@ -22,7 +22,7 @@ describe TicTacToe::ChoosePlayerMark, "#call" do
     client = build_client
     allow(client).to receive(:read_player_command).and_return("O")
 
-    actual = TicTacToe::ChoosePlayerMark.call(client: client)
+    actual = TicTacToe::ChoosePlayerMark.call(client)
 
     expect(actual).to eq(OMark)
   end
@@ -36,7 +36,7 @@ describe TicTacToe::ChoosePlayerMark, "#call" do
 
     expect(client).to receive(:say).twice.with(invalid_try_again_message)
 
-    actual = TicTacToe::ChoosePlayerMark.call(client: client)
+    actual = TicTacToe::ChoosePlayerMark.call(client)
 
     expect(actual).to eq(XMark)
   end

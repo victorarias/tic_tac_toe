@@ -2,7 +2,7 @@ require "tic_tac_toe/marks"
 
 class TicTacToe
   class ChoosePlayerMark
-    method_object [ :client! ]
+    method_object :client
 
     STRING_MARK_TO_MARK = {
       "X" => XMark,
