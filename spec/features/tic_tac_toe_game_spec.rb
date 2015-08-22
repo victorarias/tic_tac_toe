@@ -1,8 +1,11 @@
 require "open3"
 
 describe "Tic-tac-toe game" do
-  it "is winnable as X against the computer" do
+  before do
     run_game
+  end
+
+  it "is winnable as X against the computer" do
     expect_to_be_asked_to_choose_a_player
     choose_player_x
 
@@ -67,6 +70,25 @@ describe "Tic-tac-toe game" do
     wait_thread_to_exit
   end
 
+  it "is winnable as O against the computer" do
+    expect_to_be_asked_to_choose_a_player
+    choose_player_o
+
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 |   |   |   |
+  +---+---+---+
+2 |   |   |   |
+  +---+---+---+
+3 |   |   |   |
+  +---+---+---+
+      EOS
+    )
+
+    expect_to_be_asked_for_a_move
+  end
+
   private
 
   def run_game
@@ -79,6 +101,10 @@ describe "Tic-tac-toe game" do
 
   def choose_player_x
     @stdin.puts "X"
+  end
+
+  def choose_player_o
+    @stdin.puts "O"
   end
 
   def expect_to_see_grid(expected_grid)

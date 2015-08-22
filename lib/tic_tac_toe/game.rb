@@ -1,6 +1,6 @@
 require "attr_extras"
 
-require "tic_tac_toe/choose_player_mark"
+require "tic_tac_toe/select_marks"
 require "tic_tac_toe/board"
 require "tic_tac_toe/render_board"
 require "tic_tac_toe/position"
@@ -11,13 +11,13 @@ class TicTacToe
     static_facade :run
 
     def run
-      player_mark = ChoosePlayerMark.call(client: self)
-      computer_mark = select_computer_mark(player_mark)
+      player_mark, computer_mark = SelectMarks.call(self)
 
       board = Board.empty
       RenderBoard.call(board: board, client: self)
 
       loop do
+
         puts "Where do you want to move?"
 
         board = play(mark: player_mark, with_position: read_position_from_player, board: board)
@@ -40,10 +40,6 @@ class TicTacToe
     end
 
     private
-
-    def select_computer_mark(player_mark)
-      [ XMark, OMark ].reject { |mark| mark == player_mark }.first
-    end
 
     def play(mark:, with_position:, board:)
       move = Move.new(position: with_position, mark: mark)
