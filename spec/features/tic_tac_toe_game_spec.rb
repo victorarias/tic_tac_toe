@@ -74,6 +74,7 @@ describe "Tic-tac-toe game" do
     expect_to_be_asked_to_choose_a_player
     choose_player_o
 
+    pending
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
@@ -87,6 +88,7 @@ describe "Tic-tac-toe game" do
     )
 
     expect_to_be_asked_for_a_move
+    wait_thread_to_exit
   end
 
   private
