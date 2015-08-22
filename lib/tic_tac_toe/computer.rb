@@ -12,7 +12,7 @@ module TicTacToe
 
     def random_number_generator
       @random_number_generator ||= Proc.new { |max|
-        rand % max
+        rand(max)
       }
     end
   end

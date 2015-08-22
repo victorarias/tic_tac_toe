@@ -29,9 +29,9 @@ describe "Tic-tac-toe game" do
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
-1 | O |   |   |
+1 |   |   |   |
   +---+---+---+
-2 |   | X |   |
+2 |   | X | O |
   +---+---+---+
 3 |   |   |   |
   +---+---+---+
@@ -44,9 +44,9 @@ describe "Tic-tac-toe game" do
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
-1 | O | X |   |
+1 |   | X |   |
   +---+---+---+
-2 |   | X |   |
+2 |   | X | O |
   +---+---+---+
 3 |   |   |   |
   +---+---+---+
@@ -56,11 +56,11 @@ describe "Tic-tac-toe game" do
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
-1 | O | X | O |
+1 |   | X |   |
   +---+---+---+
-2 |   | X |   |
+2 |   | X | O |
   +---+---+---+
-3 |   |   |   |
+3 |   |   | O |
   +---+---+---+
       EOS
     )
@@ -71,11 +71,11 @@ describe "Tic-tac-toe game" do
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
-1 | O | X | O |
+1 |   | X |   |
   +---+---+---+
-2 |   | X |   |
+2 |   | X | O |
   +---+---+---+
-3 |   | X |   |
+3 |   | X | O |
   +---+---+---+
       EOS
     )
@@ -93,9 +93,9 @@ describe "Tic-tac-toe game" do
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
-1 | X |   |   |
+1 |   |   |   |
   +---+---+---+
-2 |   |   |   |
+2 |   |   | X |
   +---+---+---+
 3 |   |   |   |
   +---+---+---+
@@ -108,9 +108,9 @@ describe "Tic-tac-toe game" do
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
-1 | X | O |   |
+1 |   | O |   |
   +---+---+---+
-2 |   |   |   |
+2 |   |   | X |
   +---+---+---+
 3 |   |   |   |
   +---+---+---+
@@ -120,9 +120,9 @@ describe "Tic-tac-toe game" do
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
-1 | X | O | X |
+1 | X | O |   |
   +---+---+---+
-2 |   |   |   |
+2 |   |   | X |
   +---+---+---+
 3 |   |   |   |
   +---+---+---+
@@ -135,9 +135,9 @@ describe "Tic-tac-toe game" do
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
-1 | X | O | X |
+1 | X | O |   |
   +---+---+---+
-2 |   | O |   |
+2 |   | O | X |
   +---+---+---+
 3 |   |   |   |
   +---+---+---+
@@ -147,26 +147,53 @@ describe "Tic-tac-toe game" do
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
-1 | X | O | X |
+1 | X | O |   |
   +---+---+---+
-2 | X | O |   |
+2 |   | O | X |
   +---+---+---+
-3 |   |   |   |
+3 |   | X |   |
   +---+---+---+
       EOS
     )
 
     expect_to_be_asked_for_a_move
-    make_move "B3"
+    make_move "A3"
 
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
-1 | X | O | X |
+1 | X | O |   |
   +---+---+---+
-2 | X | O |   |
+2 |   | O | X |
   +---+---+---+
-3 |   | O |   |
+3 | O | X |   |
+  +---+---+---+
+      EOS
+    )
+
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 | X | O |   |
+  +---+---+---+
+2 | X | O | X |
+  +---+---+---+
+3 | O | X |   |
+  +---+---+---+
+      EOS
+    )
+
+    expect_to_be_asked_for_a_move
+    make_move "C1"
+
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 | X | O | O |
+  +---+---+---+
+2 | X | O | X |
+  +---+---+---+
+3 | O | X |   |
   +---+---+---+
       EOS
     )
