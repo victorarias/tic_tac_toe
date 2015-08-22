@@ -17,7 +17,6 @@ class TicTacToe
       RenderBoard.call(board: board, client: self)
 
       loop do
-
         puts "Where do you want to move?"
 
         board = play(mark: player_mark, with_position: read_position_from_player, board: board)
