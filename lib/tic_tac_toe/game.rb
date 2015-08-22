@@ -12,19 +12,19 @@ class TicTacToe
   class Game
     static_facade :run
 
+    attr_private :mark_to_player
+
     def run
-      player_mark, computer_mark = SelectMarks.call(self)
+      assign_marks(*SelectMarks.call(self))
 
       board = Board.empty
       RenderBoard.call(board: board, client: self)
 
       loop do
-        player = Player.new(self)
-        board = play(mark: player_mark, with_position: player.select_position_for_move(board), board: board)
-        notify_win_and_exit(board) if board.won?(player_mark)
+        board = play(mark: XMark, with_position: x_mark_player.select_position_for_move(board), board: board)
+        notify_win_and_exit(board) if board.won?(XMark)
 
-        computer = Computer.new
-        board = play(mark: computer_mark, with_position: computer.select_position_for_move(board), board: board)
+        board = play(mark: OMark, with_position: o_mark_player.select_position_for_move(board), board: board)
         # TODO: implement loss
         # notify_loss_and_exit(board) if board.won?(computer_mark)
 
@@ -41,6 +41,26 @@ class TicTacToe
     end
 
     private
+
+    def assign_marks(player_mark, computer_mark)
+      player = Player.new(self)
+      computer = Computer.new
+
+      player_to_mark = {
+        player => player_mark,
+        computer => computer_mark,
+      }
+
+      @mark_to_player = player_to_mark.to_a.map { |player_and_mark| player_and_mark.reverse }.to_h
+    end
+
+    def x_mark_player
+      mark_to_player[XMark]
+    end
+
+    def o_mark_player
+      mark_to_player[OMark]
+    end
 
     def play(mark:, with_position:, board:)
       move = Move.new(position: with_position, mark: mark)
