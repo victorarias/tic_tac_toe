@@ -21,15 +21,14 @@ class TicTacToe
 
       loop do
         board = play(mark: XMark, with_position: x_mark_player.select_position_for_move(board), board: board)
-        notify_win_and_exit(board) if board.won?(XMark)
-
         RenderBoard.call(board: board, client: self)
+
+        notify_win_and_exit(XMark, board) if board.won?(XMark)
 
         board = play(mark: OMark, with_position: o_mark_player.select_position_for_move(board), board: board)
-        # TODO: implement loss
-        # notify_loss_and_exit(board) if board.won?(computer_mark)
-
         RenderBoard.call(board: board, client: self)
+
+        notify_win_and_exit(OMark, board) if board.won?(OMark)
       end
     end
 
@@ -68,10 +67,8 @@ class TicTacToe
       board.apply_move(move)
     end
 
-    def notify_win_and_exit(board)
-      RenderBoard.call(board: board, client: self)
-
-      say("You won, congrats!")
+    def notify_win_and_exit(mark, board)
+      say("#{mark.to_s} won, cheers!")
       exit
     end
   end

@@ -80,7 +80,7 @@ describe "Tic-tac-toe game" do
       EOS
     )
 
-    expect_to_win
+    expect_x_to_win
     wait_thread_to_exit
   end
 
@@ -103,9 +103,75 @@ describe "Tic-tac-toe game" do
     )
 
     expect_to_be_asked_for_a_move
+    make_move "B1"
 
-    pending
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 | X | O |   |
+  +---+---+---+
+2 |   |   |   |
+  +---+---+---+
+3 |   |   |   |
+  +---+---+---+
+      EOS
+    )
 
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 | X | O | X |
+  +---+---+---+
+2 |   |   |   |
+  +---+---+---+
+3 |   |   |   |
+  +---+---+---+
+      EOS
+    )
+
+    expect_to_be_asked_for_a_move
+    make_move "B2"
+
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 | X | O | X |
+  +---+---+---+
+2 |   | O |   |
+  +---+---+---+
+3 |   |   |   |
+  +---+---+---+
+      EOS
+    )
+
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 | X | O | X |
+  +---+---+---+
+2 | X | O |   |
+  +---+---+---+
+3 |   |   |   |
+  +---+---+---+
+      EOS
+    )
+
+    expect_to_be_asked_for_a_move
+    make_move "B3"
+
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 | X | O | X |
+  +---+---+---+
+2 | X | O |   |
+  +---+---+---+
+3 |   | O |   |
+  +---+---+---+
+      EOS
+    )
+
+    expect_o_to_win
     wait_thread_to_exit
   end
 
@@ -154,8 +220,12 @@ describe "Tic-tac-toe game" do
     @stdin.puts move
   end
 
-  def expect_to_win
-    expect(@stdout.gets.chomp).to eq("You won, congrats!")
+  def expect_x_to_win
+    expect(@stdout.gets.chomp).to eq("X won, cheers!")
+  end
+
+  def expect_o_to_win
+    expect(@stdout.gets.chomp).to eq("O won, cheers!")
   end
 
   def wait_thread_to_exit
