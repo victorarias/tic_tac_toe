@@ -1,7 +1,7 @@
 require "open3"
 
 describe "Tic-tac-toe game" do
-  it "is playable with the computer" do
+  it "is winnable as X against the computer" do
     run_game
     expect_to_be_asked_to_choose_a_player
     choose_player_x
