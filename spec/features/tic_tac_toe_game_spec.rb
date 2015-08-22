@@ -9,20 +9,22 @@ describe "Tic-tac-toe game" do
     expect_to_be_asked_to_choose_a_player
     choose_player_x
 
+    expect_to_see_empty_grid
+
+    expect_to_be_asked_for_a_move
+    make_move "B2"
+
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
 1 |   |   |   |
   +---+---+---+
-2 |   |   |   |
+2 |   | X |   |
   +---+---+---+
 3 |   |   |   |
   +---+---+---+
       EOS
     )
-
-    expect_to_be_asked_for_a_move
-    make_move "B2"
 
     expect_to_see_grid(<<-EOS
     A   B   C
@@ -38,6 +40,18 @@ describe "Tic-tac-toe game" do
 
     expect_to_be_asked_for_a_move
     make_move "B1"
+
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 | O | X |   |
+  +---+---+---+
+2 |   | X |   |
+  +---+---+---+
+3 |   |   |   |
+  +---+---+---+
+      EOS
+    )
 
     expect_to_see_grid(<<-EOS
     A   B   C
@@ -74,7 +88,34 @@ describe "Tic-tac-toe game" do
     expect_to_be_asked_to_choose_a_player
     choose_player_o
 
+    expect_to_see_empty_grid
+
+    expect_to_see_grid(<<-EOS
+    A   B   C
+  +---+---+---+
+1 | X |   |   |
+  +---+---+---+
+2 |   |   |   |
+  +---+---+---+
+3 |   |   |   |
+  +---+---+---+
+      EOS
+    )
+
+    expect_to_be_asked_for_a_move
+
     pending
+
+    wait_thread_to_exit
+  end
+
+  private
+
+  def run_game
+    @stdin, @stdout, @wait_thread = Open3.popen2("bin/ttt --test-seed")
+  end
+
+  def expect_to_see_empty_grid
     expect_to_see_grid(<<-EOS
     A   B   C
   +---+---+---+
@@ -85,16 +126,7 @@ describe "Tic-tac-toe game" do
 3 |   |   |   |
   +---+---+---+
       EOS
-    )
-
-    expect_to_be_asked_for_a_move
-    wait_thread_to_exit
-  end
-
-  private
-
-  def run_game
-    @stdin, @stdout, @wait_thread = Open3.popen2("bin/ttt --test-seed")
+  )
   end
 
   def expect_to_be_asked_to_choose_a_player

@@ -11,7 +11,6 @@ require "tic_tac_toe/computer"
 class TicTacToe
   class Game
     static_facade :run
-
     attr_private :mark_to_player
 
     def run
@@ -23,6 +22,8 @@ class TicTacToe
       loop do
         board = play(mark: XMark, with_position: x_mark_player.select_position_for_move(board), board: board)
         notify_win_and_exit(board) if board.won?(XMark)
+
+        RenderBoard.call(board: board, client: self)
 
         board = play(mark: OMark, with_position: o_mark_player.select_position_for_move(board), board: board)
         # TODO: implement loss
