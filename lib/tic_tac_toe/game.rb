@@ -20,11 +20,11 @@ class TicTacToe
 
       loop do
         player = Player.new(self)
-        board = play(mark: player_mark, with_position: player.select_move, board: board)
+        board = play(mark: player_mark, with_position: player.select_position_for_move(board), board: board)
         notify_win_and_exit(board) if board.won?(player_mark)
 
         computer = Computer.new
-        board = play(mark: computer_mark, with_position: computer.select_mark(board), board: board)
+        board = play(mark: computer_mark, with_position: computer.select_position_for_move(board), board: board)
         # TODO: implement loss
         # notify_loss_and_exit(board) if board.won?(computer_mark)
 

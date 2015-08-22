@@ -1,13 +1,13 @@
 require "tic_tac_toe/player"
 
-describe TicTacToe::Player, "#select_move" do
+describe TicTacToe::Player, "#select_position_for_move(board)" do
   it "asks the player to make a move" do
     client = build_client
 
     expect(client).to receive(:say).with("Where do you want to move?")
 
     player = TicTacToe::Player.new(client)
-    player.select_move
+    player.select_position_for_move(nil)
   end
 
   it "reads the player command and returns a position" do
@@ -19,7 +19,7 @@ describe TicTacToe::Player, "#select_move" do
 
 
     expected_position = TicTacToe::Position.parse(player_input)
-    expect(player.select_move).to eq(expected_position)
+    expect(player.select_position_for_move(nil)).to eq(expected_position)
   end
 
   private
