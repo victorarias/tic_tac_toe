@@ -1,9 +1,9 @@
 Tic Tac Toe
 ===========================
 
-This is an implementation of the game Tic Tac Toe in Ruby. It's not fully functional, but it's possible to reach the end of the game by beating the computer.
+This is an implementation of the game Tic Tac Toe in Ruby. It's not fully functional, but it's possible to reach the end of the game by beating or losing to the computer.
 
-You can find the main feature/acceptance spec [here](https://github.com/victorarias/tic_tac_toe/blob/master/spec/features/tic_tac_toe_game_spec.rb).
+You can find the main feature/acceptance specs [here](https://github.com/victorarias/tic_tac_toe/blob/master/spec/features/tic_tac_toe_game_spec.rb).
 
 ### Instructions
 
